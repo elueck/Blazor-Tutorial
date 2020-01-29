@@ -1,0 +1,109 @@
+﻿@page "/"
+<h1>Hello and welcome to this Blazor Tutorial!</h1>
+<br />
+<div class="row">
+    <div class="col-5">
+        <h4>
+            Here you can learn the basics of web-assembly for creating browser based interactive websites.
+            Some programming knowledge is recommended before diving in.
+        </h4>
+    </div>
+    <div class="col-1">
+    </div>
+    <div class="col-3">
+        <p>
+            To easily get set up with Blazor on your own computer, visit <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/blazor/get-started?view=aspnetcore-3.1&tabs=visual-studio">THIS LINK</a> for a quick guide.<br />
+            Also, visit <a target="_blank" href="https://docs.microsoft.com/en-us/visualstudio/releases/2019/system-requirements">THIS LINK</a> for hardware requirements regarding the use of Visual Studio 2019 Preview.
+        </p>
+    </div>
+</div>
+<br />
+<br />
+
+<div class="row">
+    <div class="form-group col-5">
+        Intro to using <mark @onmouseover="MOVarEnter" @onmouseout="MOVarLeave" @onclick="MOVarClick" class="@markVarType">c# string variables</mark> in the browser
+        <br />
+        <br />
+        Simply insert an <mark class="@markSyntax">@at</mark> symbol before the c# variable you want to insert within your html, and Blazor will recognize the variable as a string/int.<br />
+        Here are some examples:
+        <br />
+        <br />
+        <mark>Try pressing that submit button below:</mark>
+    </div>
+
+    <div class="col-1"></div>
+
+    <div class="form-group col-5">
+        <textarea class="form-control" id="exampleFormControlTextarea3" style="font-family: Consolas" rows="7">@test</textarea>
+        <br />
+        <br />
+        <textarea readonly class="form-control codeAssistant" id="exampleFormControlTextarea3" style="font-family: Consolas" rows="7">@setRefText</textarea>
+    </div>
+    <pre><code class="language-aspnet">
+        private int currentCount = 0;
+
+        private void IncrementCount()
+        {
+        currentCount++;
+        }
+    </code></pre>
+</div>
+
+<button type="button" class="btn btn-primary">Submit</button>
+
+@code{
+    private string markVarType = "markVarType";
+    private bool clicked = false;
+
+    private string markSyntax = "markSyntax";
+
+    private void MOVarEnter()
+    {
+        markVarType = "selectedMarkVarType";
+        setRefText = "You have moused over the button";
+        clicked = false;
+    }
+    private void MOVarLeave()
+    {
+        MOVarLeaveHelper(clicked);
+    }
+    private void MOVarLeaveHelper(bool clicked)
+    {
+        if (!clicked)
+        {
+            markVarType = "markVarType";
+            setRefText = "You have moused off of the button";
+        }
+        clicked = false;
+    }
+    private void MOVarClick()
+    {
+        markVarType = "markVarType";
+        setRefText = "You have toggled the contents of the button";
+        clicked = true;
+    }
+
+
+    private string at = "@";
+    private string setRefText = "placeholder";
+    private string test = "<h1>Counter</h1>"
+    + "\n"
+    + "<p>Current count: @currentCount</p>"
+    + "\n"
+    + "<button class=\"btn btn-primary\" @onclick=\"IncrementCount\">Click me</button>"
+    + "\n"
+    + "\n@code {\n"
+    + "    private int currentCount = 0;"
+    + "\n"
+    + "    private void IncrementCount()\n"
+    + "    {\n"
+    + "        currentCount++;\n"
+    + "    }\n"
+    + "}";
+
+    private void ExampleOne()
+    {
+    }
+
+}
